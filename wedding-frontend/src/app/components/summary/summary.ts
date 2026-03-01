@@ -2,6 +2,7 @@ import { Component, OnInit , ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-summary',
@@ -55,7 +56,7 @@ export class Summary implements OnInit{
 }
 
   fetchMyBooking() {
-    this.http.get<any>(`https://wedding-backend-wtbd.onrender.com/api/get-booked-seats?name=${this.userName}`)
+    this.http.get<any>(`${environment.apiUrl}/api/get-booked-seats?name=${this.userName}`)
       .subscribe({
         next: (res) => {
           if (res.userBooking) {

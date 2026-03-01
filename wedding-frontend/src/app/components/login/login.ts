@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class Login implements OnInit {
   const name = this.guestName;
   console.log('name is ...   ',name);
   // ส่งชื่อไปเช็คพร้อมกับการดึงข้อมูลที่นั่ง
-  this.http.get<any>(`https://wedding-backend-wtbd.onrender.com/api/get-booked-seats?name=${name}`)
+  this.http.get<any>(`${environment.apiUrl}/api/get-booked-seats?name=${name}`)
     .subscribe({
       next: (res) => {
         sessionStorage.setItem('guestName', name);

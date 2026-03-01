@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef, signal } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // สำหรับส่งข้อมูลไป Render
-
+import { environment } from '../../../environments/environment';
 
 const API_URL = 'https://wedding-backend-wtbd.onrender.com/api/save-booking';
 
@@ -37,7 +37,8 @@ ngOnInit() {
 }
 
 loadBookedSeats() 
-  {this.http.get<any>('https://wedding-backend-wtbd.onrender.com/api/get-booked-seats')
+
+  {this.http.get<any>(`${environment.apiUrl}/api/get-booked-seats`)
     .subscribe({
       next: (res) => {
         // เก็บเฉพาะเลขที่นั่ง (seat_number) ลงใน array
