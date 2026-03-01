@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // สำหรับส่งข้อมูลไป Render
 import { environment } from '../../../environments/environment';
 
-const API_URL = 'https://wedding-backend-wtbd.onrender.com/api/save-booking';
+const API_URL = `${environment.apiUrl}/api/save-booking`;
 
 @Component({
   selector: 'app-seat-plan',

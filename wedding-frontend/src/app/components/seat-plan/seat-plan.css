@@ -6,8 +6,11 @@
   font-family: 'Sarabun', sans-serif;
   
   /* ✅ เปิดระบบ Scrollbar อัตโนมัติทั้งแนวตั้งและแนวนอน */
-  overflow: auto; 
+  overflow: visible;
   
+/* ✅ [เพิ่มใหม่] คำสั่งเจาะจงสำหรับมือถือ: อนุญาตให้ใช้นิ้วแพน (pan) และถ่างซูม (pinch-zoom) ได้อย่างอิสระ */
+  touch-action: pan-x pan-y pinch-zoom;
+
   /* ✅ บังคับให้เป็น Block ธรรมดา*/
   display: block;
 }
@@ -302,3 +305,96 @@
   border: none; border-radius: 8px; font-size: 16px; cursor: pointer;
 }
 .confirm-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+
+/* ========================================================
+   ✅ [เพิ่มใหม่ Responsive] รองรับ iPhone Size M, L, XL และมือถือทุกรุ่น
+   ======================================================== */
+
+/* 1. สำหรับหน้าจอที่เล็กกว่าคอมพิวเตอร์ (Tablet / iPad ลงมา) */
+/* 1. สำหรับหน้าจอที่เล็กกว่าคอมพิวเตอร์ (Tablet / iPad ลงมา) */
+/* 1. สำหรับหน้าจอที่เล็กกว่าคอมพิวเตอร์ (Tablet / iPad ลงมา) */
+@media screen and (max-width: 1024px) {
+  /* ✅ 1. ล็อกหน้าเว็บไม่ให้ขยายตามแผนผัง (แก้ปัญหา Header แหว่ง) */
+  body, html {
+    overflow-x: hidden;
+  }
+
+  .seat-plan-wrapper {
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  /* ✅ 2. ล็อกส่วนหัวและปุ่มให้พอดีกับหน้าจอมือถือเสมอ */
+  .header-section, 
+  .footer-action {
+    min-width: 100% !important; 
+    width: 100% !important;
+    box-sizing: border-box; /* ป้องกันขอบล้นจอ */
+  }
+  
+  /* ✅ 3. บังคับให้ "เลื่อนซ้าย-ขวาได้เฉพาะในกล่องนี้เท่านั้น" */
+  .floor-plan-container {
+    min-width: 100% !important; 
+    max-width: 100% !important; 
+    width: 100% !important;
+    overflow-x: auto; /* สร้าง Scroll แนวนอนเฉพาะกล่องแผนผัง */
+    -webkit-overflow-scrolling: touch; 
+    padding: 20px 10px;
+    box-sizing: border-box; /* สำคัญมาก ป้องกัน padding ดันกล่องทะลุจอ */
+    
+    align-items: flex-start !important; /* แก้ปัญหาฝั่งซ้ายตกขอบ */
+  }
+
+  /* บังคับกลุ่มโต๊ะหลักให้เริ่มจากซ้าย และเผื่อพื้นที่ขอบขวาตอนไถสุด */
+  .main-tables-zone {
+    justify-content: flex-start !important;
+    padding-right: 40px; 
+  }
+
+  /* ล็อกโซน VIP ให้กว้างเท่ากลุ่มโต๊ะหลัก เพื่อให้ตอนเลื่อนมันไปพร้อมๆ กัน */
+  .vip-zone {
+    width: 800px; 
+  }
+}
+
+/* 2. สำหรับ iPhone Size M, L, XL (หน้าจอกว้างไม่เกิน 480px) */
+@media screen and (max-width: 480px) {
+  .seat-plan-wrapper {
+    padding: 10px; /* ลดขอบนอกสุดลง เพื่อเพิ่มพื้นที่ให้แผนผัง */
+  }
+
+  /* ✅ ปรับกล่องด้านบน (Header) ให้เรียงซ้อนกันแนวตั้ง */
+  .header-section {
+    grid-template-columns: 1fr; /* แตกจาก 3 คอลัมน์ เป็น 1 คอลัมน์ */
+    gap: 15px;
+    padding: 15px 20px;
+  }
+
+  /* จัดปุ่มย้อนกลับให้กดง่ายขึ้น */
+  .btn-back {
+    font-size: 16px; 
+    padding: 5px 0;
+  }
+
+  /* จัดสัญลักษณ์สี (Legend) ให้อยู่ตรงกลางและตัดบรรทัดได้ถ้าล้น */
+  .legend {
+    justify-self: center; 
+    flex-wrap: wrap; 
+    justify-content: center;
+  }
+
+  /* ✅ ปรับกล่องด้านล่าง (Footer) ให้เหมาะกับนิ้วโป้ง */
+  .footer-action {
+    flex-direction: column; /* ให้ข้อความกับปุ่มซ้อนกัน */
+    gap: 15px;
+    padding: 15px 20px;
+  }
+
+  /* ขยายปุ่มยืนยันให้กว้าง 100% เต็มจอ กดง่ายชัวร์ๆ */
+  .confirm-btn {
+    width: 100%; 
+    font-size: 18px;
+    padding: 15px;
+  }
+}

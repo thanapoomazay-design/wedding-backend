@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:4200' // หรือพอร์ตที่คุณใช้รันในคอม
+  apiUrl: 'https://wedding-backend-wtbd.onrender.com' // หรือพอร์ตที่คุณใช้รันในคอม
 };
