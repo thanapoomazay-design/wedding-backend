@@ -1,0 +1,142 @@
+/* คอนเทนเนอร์หลัก จัดให้อยู่กึ่งกลางหน้าจอ */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fcfaf8; /* สีพื้นหลังขาวนวล */
+  font-family: 'Sarabun', sans-serif;
+}
+
+/* การ์ดสีขาว */
+.card {
+  background: white;
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+/* ปุ่มย้อนกลับ */
+.header {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  color: #8d775f;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+h2 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+p {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 30px;
+}
+
+/* แถวเลือกจำนวนคน */
+.counter-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f5f2; /* สีครีมอ่อน */
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.info {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-weight: bold;
+  color: #444;
+  font-size: 16px;
+}
+
+.sub-label {
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* ปุ่มบวกลบ */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.controls button {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: white;
+  color: #8d775f;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.controls button:hover {
+  background-color: #eee;
+}
+
+.controls span {
+  font-weight: bold;
+  font-size: 18px;
+  min-width: 20px;
+}
+
+/* สรุปยอด */
+.summary {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 5px;
+  border-top: 1px solid #eee;
+  margin-top: 10px;
+  font-size: 16px;
+  color: #666;
+}
+
+.total {
+  font-weight: bold;
+  color: #333;
+}
+
+/* ปุ่มหลักด้านล่าง */
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background-color: #8d775f; /* สีน้ำตาลทอง */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #7a6651;
+  box-shadow: 0 4px 12px rgba(141, 119, 95, 0.3);
+}

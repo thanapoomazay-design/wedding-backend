@@ -1,0 +1,35 @@
+<div class="main-container">
+  <div class="card">
+    <button class="back-link" (click)="goBack()">
+       < ย้อนกลับ
+    </button>
+
+    <h2 class="title">ข้อมูลผู้ร่วมงาน</h2>
+    <p class="subtitle">กรุณาระบุชื่อ-นามสกุลของผู้ร่วมงานทุกท่าน</p>
+
+    <div *ngFor="let adult of adults; let i = index" class="input-section">
+      <label class="input-label">
+        <span class="icon">👤</span> ผู้ใหญ่คนที่ {{ i + 1 }}
+      </label>
+      <input 
+        type="text" 
+        [(ngModel)]="adults[i].fullName" 
+        placeholder="ชื่อ-นามสกุล"
+        class="custom-input"
+      >
+    </div>
+
+    <div *ngFor="let child of children; let i = index" class="input-section">
+      <label class="input-label">
+        <span class="icon">👶</span> เด็กคนที่ {{ i + 1 }}
+      </label>
+      <input 
+        type="text" 
+        [(ngModel)]="children[i].fullName" 
+        placeholder="ชื่อ-นามสกุล"
+        class="custom-input"
+      >
+    </div>
+    <button type="button" class="btn-submit" (click)="goToSelectSeat()">เลือกที่นั่ง</button>
+  </div>
+</div>

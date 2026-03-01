@@ -1,0 +1,30 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="heart-icon">🤎</div>
+      <h1>ยินดีต้อนรับสู่งานแต่งงาน</h1>
+      <p>กรุณากดปุ่มด้านล่างเพื่อเริ่มการจองที่นั่ง</p>
+      <div class="input-group">
+      <label for="name">ชื่อ-นามสกุล</label>
+      <input 
+        type="text" 
+        id="name" 
+        [(ngModel)]="guestName" 
+        placeholder="กรอกชื่อของคุณ"
+      >
+    </div>
+      <button class="btn-confirm" (click)="confirmAndGo()">
+        ยืนยันการจอง
+      </button>
+
+      <footer class="footer-text">
+        ขอบคุณที่ร่วมเป็นส่วนหนึ่งในวันพิเศษของเรา
+      </footer>
+
+<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+<input type="text" id="guestName" placeholder="กรอกชื่อของคุณ" />
+
+<button type="button" onclick="handleBooking()">ยืนยันการจอง</button>
+
+    </div>
+</div>

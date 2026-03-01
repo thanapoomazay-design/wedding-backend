@@ -1,0 +1,75 @@
+<div class="seat-plan-wrapper">
+  
+  <div class="header-section">
+    <div (click)="goBack()" class="btn-back">‹ ย้อนกลับ</div>
+    <div class="title-area">
+      <h2>เลือกที่นั่ง</h2>
+      <p>กรุณาเลือกที่นั่ง {{ totalToSelect }} ที่นั่ง</p>
+    </div>
+    <div class="legend">
+      <div class="item"><span class="dot available"></span> ว่าง</div>
+      <div class="item"><span class="dot selected"></span> เลือกแล้ว</div>
+      <div class="item"><span class="dot occupied"></span> ถูกจองแล้ว</div>
+    </div>
+  </div>
+
+  <div class="floor-plan-container">
+    
+    <div class="vip-zone">
+      <div class="row-seatvip">
+        <div *ngFor="let s of vipSeatman" class="seat vip-seatman">{{ s.id }}</div>
+        <div *ngFor="let s of vipSeatwomen" class="seat vip-seatwomen">{{ s.id }}</div>
+      </div>
+      <div class="table-vip"></div>
+    </div>
+
+    <div class="main-tables-zone">
+      
+      <div class="table-group left-l">
+        <div class="vertical-section">
+          <div class="col-seats"><div *ngFor="let s of leftOuter" class="seat" [class.active]="selectedSeats().includes(s.id)" [class.occupied]="isOccupied(s.id)" 
+     (click)="!isOccupied(s.id) && toggleSeat(s.id)">{{ s.id }}</div></div>
+          <div class="col-table"></div>
+          <div class="col-seats"><div *ngFor="let s of leftInner" class="seat" [class.active]="selectedSeats().includes(s.id)" [class.occupied]="isOccupied(s.id)" 
+     (click)="!isOccupied(s.id) && toggleSeat(s.id)">{{ s.id }}</div></div>
+        </div>
+        <div class="horizontal-section">
+          <div class="row-table"></div>
+          <div class="row-seats"><div *ngFor="let s of leftBottom" class="seat" [class.active]="selectedSeats().includes(s.id)" [class.occupied]="isOccupied(s.id)" 
+     (click)="!isOccupied(s.id) && toggleSeat(s.id)">{{ s.id }}</div></div>
+        </div>
+      </div>
+
+      <div class="table-group center-straight">
+        <div class="vertical-section">
+          <div class="col-seats"><div *ngFor="let s of centerLeft" class="seat" [class.active]="selectedSeats().includes(s.id)" [class.occupied]="isOccupied(s.id)" 
+     (click)="!isOccupied(s.id) && toggleSeat(s.id)">{{ s.id }}</div></div>
+          <div class="col-table"></div>
+          <div class="col-seats"><div *ngFor="let s of centerRight" class="seat" [class.active]="selectedSeats().includes(s.id)" [class.occupied]="isOccupied(s.id)" 
+     (click)="!isOccupied(s.id) && toggleSeat(s.id)">{{ s.id }}</div></div>
+        </div>
+      </div>
+
+      <div class="table-group right-l">
+        <div class="vertical-section">
+          <div class="col-seats"><div *ngFor="let s of rightInner" class="seat" [class.active]="selectedSeats().includes(s.id)" [class.occupied]="isOccupied(s.id)" 
+     (click)="!isOccupied(s.id) && toggleSeat(s.id)">{{ s.id }}</div></div>
+          <div class="col-table"></div>
+          <div class="col-seats"><div *ngFor="let s of rightOuter" class="seat" [class.active]="selectedSeats().includes(s.id)" [class.occupied]="isOccupied(s.id)" 
+     (click)="!isOccupied(s.id) && toggleSeat(s.id)">{{ s.id }}</div></div>
+        </div>
+        <div class="horizontal-section">
+          <div class="row-table"></div>
+          <div class="row-seats"><div *ngFor="let s of rightBottom" class="seat" [class.active]="selectedSeats().includes(s.id)" [class.occupied]="isOccupied(s.id)" 
+     (click)="!isOccupied(s.id) && toggleSeat(s.id)">{{ s.id }}</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer-action">
+    <p>เลือกแล้ว: {{ selectedSeats().length }} / {{ totalToSelect }} ที่นั่ง</p>
+    <button [disabled]="selectedSeats().length !== totalToSelect" class="confirm-btn" (click)="confirmBooking()"> ยืนยันการจอง</button>
+  </div>
+</div>

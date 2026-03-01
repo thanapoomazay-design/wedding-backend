@@ -1,0 +1,62 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fcfaf8; /* สีพื้นหลังอ่อนๆ */
+  font-family: 'Sarabun', sans-serif;
+}
+
+.login-card {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.heart-icon {
+  font-size: 60px;
+  margin-bottom: 10px;
+  color: #8d775f; /* สีน้ำตาลตามดีไซน์ */
+}
+
+h1 { font-size: 20px; color: #333; margin-bottom: 5px; }
+p { font-size: 14px; color: #777; margin-bottom: 30px; }
+
+.input-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+label { display: block; font-size: 14px; margin-bottom: 8px; font-weight: bold; }
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box; /* สำคัญมาก */
+}
+
+.btn-continue {
+  width: 100%;
+  padding: 12px;
+  background-color: #8d775f; /* สีน้ำตาลปุ่ม */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.btn-continue:hover { background-color: #7a6651; }
+
+.footer-text {
+  margin-top: 40px;
+  font-size: 12px;
+  color: #aaa;
+}

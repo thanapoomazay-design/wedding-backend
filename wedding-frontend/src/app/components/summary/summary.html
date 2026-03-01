@@ -1,0 +1,70 @@
+<div class="summary-wrapper">
+  <div class="summary-card">
+    
+    <div class="header-status">
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h2>จองที่นั่งสำเร็จ!</h2>
+      <p>ขอบคุณที่จองที่นั่งสำหรับงานแต่งของเรา</p>
+    </div>
+
+
+    <div class="info-box">
+      <div class="box-icon">👤</div>
+      <div class="box-content">
+        <h3>ข้อมูลผู้จอง</h3>
+        <p>Line ID: {{ userName }}</p>
+
+        <p class="guest-label">รายชื่อแขก:</p>
+        <div class="guest-list-container">
+        <div class="guest-item" *ngFor="let guest of guestList; let i = index">
+            <span class="guest-index"></span>
+            <span class="guest-name">{{ guest.fullName }}</span>
+        </div>
+        </div>
+
+        <p>ผู้ใหญ่: {{ adultsCount }} คน</p>
+        <p>เด็ก: {{ childrenCount }} คน</p>
+        <p>รวม: {{ totalSeats }} ที่นั่ง</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="box-icon">🪑</div>
+      <div class="box-content">
+        <h3>หมายเลขที่นั่ง</h3>
+        <div class="seat-tags">
+          <span class="seat-tag" *ngFor="let seat of selectedSeats">โต๊ะ {{ seat }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box transparent-box">
+      <div class="box-content full-width">
+        <h3>รายละเอียดงาน</h3>
+        <p>📅 วันเสาร์ที่ 15 มีนาคม 2567</p>
+        <p>🕒 เวลา 18:00 - 22:00 น.</p>
+      </div>
+    </div>
+
+    <div class="notice-box">
+      <h3>หมายเหตุสำคัญ</h3>
+      <ul>
+        <li>กรุณามาถึงก่อนเวลาเริ่มงาน 30 นาที</li>
+        <li>สามารถแก้ไขการจองได้ภายในวันที่ 10 มีนาคม 2567</li>
+        <li>หากมีข้อสงสัย กรุณาติดต่อ 02-XXX-XXXX</li>
+      </ul>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn-outline" (click)="bookAgain()">กลับไปยังหน้า Login</button>
+      <button class="btn-solid" (click)="printTicket()">พิมพ์ใบยืนยัน</button>
+    </div>
+
+    <div class="footer-note">
+      รอพบกับคุณในวันพิเศษของเรา ♥
+    </div>
+
+  </div>
+</div>

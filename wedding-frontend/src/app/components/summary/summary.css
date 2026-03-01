@@ -1,0 +1,116 @@
+.summary-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fcfaf8;
+  font-family: 'Sarabun', sans-serif;
+  padding: 20px;
+}
+
+.summary-card {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+}
+
+/* Header Status */
+.header-status { text-align: center; margin-bottom: 30px; }
+.icon-circle {
+  width: 60px; height: 60px;
+  background-color: #f8f5f2; border: 2px solid #8d775f;
+  color: #8d775f; border-radius: 50%;
+  display: flex; justify-content: center; align-items: center;
+  margin: 0 auto 15px auto;
+}
+.icon-circle svg { width: 30px; height: 30px; }
+.header-status h2 { color: #333; font-size: 24px; margin: 0 0 5px 0; }
+.header-status p { color: #777; font-size: 14px; margin: 0; }
+
+/* กล่องข้อมูลต่างๆ */
+.info-box {
+  background-color: #f8f5f2;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  display: flex;
+  gap: 15px;
+}
+.info-box.transparent-box { background-color: transparent; border: 1px solid #f8f5f2; padding-top: 5px;}
+.box-icon { font-size: 20px; opacity: 0.7; }
+.box-content h3 { color: #333; font-size: 16px; margin: 0 0 10px 0; }
+.box-content p { color: #555; font-size: 14px; margin: 0 0 5px 0; line-height: 1.5; }
+.full-width { width: 100%; }
+
+/* แท็กหมายเลขที่นั่ง */
+.seat-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+.seat-tag {
+  background-color: white;
+  color: #8d775f;
+  border: 1px solid #e0d8d0;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* คลุมรายชื่อแขกทั้งหมด */
+.guest-list-container {
+  margin-left: 10px;      /* เว้นระยะจากขอบซ้ายของ Card */
+  padding-left: 15px;     /* ระยะห่างระหว่างเส้นกับตัวหนังสือ */
+  border-left: 2px solid #d1d1d1; /* เส้นสีเทาเชื่อมต่อกันยาวลงมา */
+  list-style: none;       /* เอา Bullet มาตรฐานออก */
+}
+
+/* ปรับแต่งแต่ละรายการชื่อ */
+.guest-item {
+  position: relative;
+  margin-bottom: 12px;    /* ระยะห่างระหว่างชื่อ */
+  font-size: 13px;
+  color: #444;
+  line-height: 1.4;
+}
+
+/* ถ้าต้องการให้มีเลข 1. 2. ข้างหน้าชื่อและอยู่ในเส้น */
+.guest-item::before {
+  /* ใช้ counter ของ CSS เพื่อรันเลข */
+  counter-increment: guest-counter;
+  content: counter(guest-counter) ". ";
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+/* รีเซ็ตตัวนับเลขที่ตัวแม่ */
+.guest-list-container {
+  counter-reset: guest-counter;
+}
+
+/* กล่องหมายเหตุ */
+.notice-box {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+.notice-box h3 { color: #888; font-size: 14px; margin: 0 0 10px 0; }
+.notice-box ul { margin: 0; padding-left: 20px; color: #777; font-size: 13px; line-height: 1.8; }
+
+/* ปุ่มต่างๆ */
+.action-buttons {
+  display: flex; gap: 15px; margin-bottom: 25px;
+}
+button {
+  flex: 1; padding: 14px; border-radius: 8px; font-size: 15px; font-family: inherit; cursor: pointer; transition: 0.2s;
+}
+.btn-outline {
+  background: white; border: 1px solid #8d775f; color: #8d775f;
+}
+.btn-outline:hover { background: #f8f5f2; }
+.btn-solid {
+  background: #8d775f; border: 1px solid #8d775f; color: white;
+}
+.btn-solid:hover { background: #7a6651; }
+
+.footer-note { text-align: center; color: #aaa; font-size: 13px; }

@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <span class="back-btn" (click)="goBack()" style="cursor: pointer;">‹ ย้อนกลับ</span>
+    </div>
+
+    <h2>จำนวนผู้เข้าร่วม</h2>
+    <p>ระบุจำนวนแขกที่จะเข้าร่วมงาน</p>
+
+    <div class="counter-box">
+      <div class="info">
+        <span class="label">ผู้ใหญ่</span>
+        <span class="sub-label">13 ปีขึ้นไป</span>
+      </div>
+      <div class="controls">
+        <button (click)="updateCount('adult', -1)">-</button>
+        <span>{{ adults() }}</span>
+        <button (click)="updateCount('adult', 1)">+</button>
+      </div>
+    </div>
+
+    <div class="counter-box">
+      <div class="info">
+        <span class="label">เด็ก</span>
+        <span class="sub-label">0-12 ปี</span>
+      </div>
+      <div class="controls">
+        <button (click)="updateCount('child', -1)">-</button>
+        <span>{{ children() }}</span>
+        <button (click)="updateCount('child', 1)">+</button>
+      </div>
+    </div>
+
+    <div class="summary">
+      <span>รวมทั้งหมด</span>
+      <span class="total">{{ totalGuests() }} ที่นั่ง</span>
+    </div>
+
+    <button class="btn-primary" (click)="goToSeatPlan()">ถัดไป</button>
+  </div>
+</div>

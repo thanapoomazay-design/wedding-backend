@@ -1,0 +1,304 @@
+/* การจัดวางภาพรวม */
+.seat-plan-wrapper {
+  background: #fcfaf8;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: 'Sarabun', sans-serif;
+  
+  /* ✅ เปิดระบบ Scrollbar อัตโนมัติทั้งแนวตั้งและแนวนอน */
+  overflow: auto; 
+  
+  /* ✅ บังคับให้เป็น Block ธรรมดา*/
+  display: block;
+}
+
+/* 1. แก้ไขกล่องคลุมส่วนหัวเป็น Grid */
+.header-section {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* แบ่ง 3 ส่วนซ้าย-กลาง-ขวา เหมือนเดิม */
+  align-items: center;
+  
+  padding: 15px 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+
+  /* ✅ สิ่งที่ต้องเปลี่ยน: ล็อกขนาดให้เท่ากับแผนผัง */
+  margin: 0 auto 20px auto;
+  min-width: 950px;     /* บังคับความกว้างให้เท่ากับ .floor-plan-container */
+  width: max-content;   /* ห้ามบีบเนื้อหาข้างในเด็ดขาด */
+}
+
+/* 2. บังคับปุ่มย้อนกลับให้ชิดซ้ายสุด */
+.btn-back { 
+  justify-self: start; /* เพิ่มบรรทัดนี้ */
+  color: #8d775f; 
+  cursor: pointer; 
+  font-size: 14px;
+}
+
+/* 3. บังคับหัวข้อให้อยู่ตรงกลางเป๊ะๆ */
+.title-area {
+  text-align: center; /* เพิ่มบรรทัดนี้ */
+}
+
+.title-area h2 { margin: 0; font-size: 20px; }
+.title-area p { margin: 5px 0 0 0; font-size: 14px; color: #777;}
+
+/* 4. บังคับคำอธิบายสีให้ชิดขวาสุด */
+.legend { 
+  justify-self: end; /* เพิ่มบรรทัดนี้ */
+  display: flex; 
+  gap: 15px; 
+}
+
+.seat.occupied {
+  background-color: #ff4d4d !important; /* สีแดง */
+  color: white !important;
+  cursor: not-allowed !important;
+  pointer-events: none; /* ล็อกไม่ให้กดได้ */
+  opacity: 0.8;
+}
+
+.seat.my-seat {
+  background-color: #4CAF50 !important;
+  color: white !important;
+  cursor: pointer;
+  border: 2px solid #2e7d32;
+}
+
+.legend .item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.dot { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid #ccc; }
+.dot.available { background: white; }
+.dot.selected { background: #8d775f; border-color: #8d775f; }
+.dot.occupied { background: #ff4d4d; }
+
+/* พื้นที่ผังโต๊ะ */
+.floor-plan-container {
+ background: white;
+  border-radius: 12px;
+  padding: 40px;
+  
+  /* ✅ ใช้ Margin จัดกึ่งกลางแทน วิธีนี้จะรักษาขอบซ้าย/ขวา ไม่ให้ทะลุจอตอนซูม */
+  margin: 0 auto; 
+  
+  /* ✅ ล็อกขนาดห้ามบีบเข้า (ใส่ไว้เหมือนเดิม) */
+  width: max-content;
+  min-width: 950px; 
+  
+  /* (ส่วนที่เหลือด้านในยังใช้ flex จัดโต๊ะได้ตามปกติ) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+
+}
+
+/* 1. โต๊ะ VIP (ประธาน) */
+.vip-zone { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.table-vip { width: 120px; height: 45px; background: #f5f5f5; border: 1px solid #ddd; border-radius: 4px;}
+
+/* =========================================
+   1. จัดกลุ่ม 3 แถวหลักให้ชิดกันมากขึ้น
+   ========================================= */
+.main-tables-zone {
+  display: flex;
+  justify-content: center;
+  gap: 40px; 
+  /* เพิ่ม 2 บรรทัดนี้เข้าไป */
+  min-width: 800px; /* บังคับความกว้างขั้นต่ำ (ปรับตัวเลขให้คลุมโต๊ะซ้ายถึงขวาพอดี) */
+  flex-wrap: nowrap; /* ห้ามปัดตกบรรทัดเด็ดขาด */
+
+  /* ✅ เพิ่มบรรทัดนี้ สั่งห้าม Flexbox ดันของตกลงไปข้างล่าง */
+  flex-wrap: nowrap;
+
+}
+
+.table-group { display: flex; flex-direction: column; }
+.vertical-section { display: flex; flex-direction: row; gap: 8px; }
+
+/* 1. หั่นโต๊ะแนวตั้ง (ซ้าย, กลาง, ขวา) */
+.col-table {
+  width: 45px;
+  height: 510px; /* ปรับความยาวให้ครอบคลุมเก้าอี้ 15 ตัวพอดี */
+  background: repeating-linear-gradient(
+    to bottom,
+    #f5f5f5,
+    #f5f5f5 100px,      /* ขนาดความยาวโต๊ะ 1 กลุ่ม */
+    transparent 102px  /* สิ้นสุดรอยตัด (88 + 15) */
+  );
+  border: none;
+  filter: drop-shadow(0 0 1px #ccc);
+}
+
+
+/* 2. หั่นโต๊ะแนวนอน (ฐานของตัว L) */
+.row-table {
+  height: 45px;
+  width: 191px !important; /* ล็อกความกว้างให้คลุมเก้าอี้ทั้งหมด */
+  background: repeating-linear-gradient(
+    to right,
+    #f5f5f5,
+    #f5f5f5 94px,      /* ความยาวโต๊ะท่อนแรก (สำหรับเก้าอี้ 3 ตัว) */
+    transparent 96px  /* ช่องว่างขนาด 15px */
+  );
+  border: none;
+  filter: drop-shadow(0 0 1px #ccc);
+  z-index: 1;
+}
+
+.horizontal-section { 
+  display: flex; 
+  flex-direction: column; 
+  margin-top: -5px; /* ดึงขอบโต๊ะขึ้นไปซ้อนกับแนวตั้งนิดนึงเพื่อปิดรอยต่อ */
+  /* หรือลองเพิ่ม padding ด้านบน */
+  padding-top: 10px; 
+}
+
+/* ฝั่งซ้าย (A) ชิดซ้าย */
+.left-l .horizontal-section {
+  align-items: flex-start;
+  margin-left: 36px;
+}
+/* ========================================================
+   แก้ไข: โต๊ะฝั่งขวา (C) ให้เป็นรูปตัว L กลับด้านชี้เข้าตรงกลาง
+   ======================================================== */
+
+/* 1. ล้างค่าการกลับด้าน (Scale) ของเก่าทิ้งให้หมดเพื่อป้องกัน Error */
+.right-l, 
+.right-l .seat, 
+.right-l .seat-label {
+  transform: none !important; 
+}
+
+/* 2. สั่งให้กล่องแนวตั้งของโซน C ชิดขอบด้านขวา */
+.right-l {
+  align-items: flex-end; 
+}
+
+/* ฝั่งขวา (C) ชิดขวา */
+.right-l .horizontal-section {
+  align-items: flex-end;
+  margin-right: 36px;
+}
+
+
+/* ========================================================
+   สไตล์พิเศษสำหรับเก้าอี้ประธาน (VIP)
+   ======================================================== */
+.vip-seatman {
+  background-color: #0044ff !important; /* พื้นหลังสีทอง */
+  border-color: #B5952F !important;     /* ขอบสีทองเข้ม */
+  color: #ffffff !important;            /* ตัวอักษรสีขาว */
+  
+  cursor: not-allowed !important; /* เปลี่ยนสัญลักษณ์เมาส์เป็นรูปวงกลมขีดฆ่า (ห้ามกด) */
+  pointer-events: none !important;           /* ปิดการ Hover และการคลิกด้วย CSS ทับอีกชั้น */
+}
+.vip-seatwomen {
+  background-color: #ff00ea !important; /* พื้นหลังสีทอง */
+  border-color: #B5952F !important;     /* ขอบสีทองเข้ม */
+  color: #ffffff !important;            /* ตัวอักษรสีขาว */
+  
+    cursor: not-allowed !important; /* เปลี่ยนสัญลักษณ์เมาส์เป็นรูปวงกลมขีดฆ่า (ห้ามกด) */
+  pointer-events: none !important;           /* ปิดการ Hover และการคลิกด้วย CSS ทับอีกชั้น */
+}
+
+/* 4. สไตล์เก้าอี้ทั้งหมด */
+.seat {
+  width: 26px; /* ปรับให้ใหญ่ขึ้นนิดนึงเพื่อให้ตัวเลขอยู่สบายๆ */
+  height: 26px;
+  border: 1.5px solid #8d775f;
+  border-radius: 50%;
+  cursor: pointer;
+  background: white;
+  transition: 0.2s;
+  
+  /* ส่วนที่เพิ่มใหม่สำหรับจัดอักษร */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px; /* ขนาดตัวอักษร */
+  font-weight: 600;
+  color: #8d775f; /* สีอักษรตอนยังไม่เลือก */
+
+  position: relative; /* หรือ absolute, fixed ก็ได้ แต่ relative จะไม่กระทบตำแหน่งเดิม */
+  z-index: 10; /* กำหนดค่าให้สูงพอเพื่อให้ปุ่มอยู่ชั้นบนสุดเสมอ (เลขยิ่งมาก ยิ่งอยู่บน) */
+}
+
+.seat.active { 
+  background: #8d775f; 
+  border-color: #8d775f;
+  color: white; /* เปลี่ยนสีอักษรเป็นสีขาวเมื่อถูกเลือก */
+}
+.seat:hover { transform: scale(1.15); box-shadow: 0 2px 5px rgba(141,119,95,0.4); }
+
+.col-seats { display: flex; flex-direction: column; justify-content: space-evenly; }
+/* --------------------------------------
+   สร้างที่คั่นโต๊ะ (กลุ่มละ 6 คน = ฝั่งละ 3)
+   -------------------------------------- */
+
+  
+/* เก้าอี้แนวตั้ง */
+.col-seats .seat {
+  margin-bottom: 5px; /* ช่องไฟปกติระหว่างเก้าอี้ */
+}
+.col-seats .seat:nth-child(3n) {
+  margin-bottom: 10px; /* ลดช่องว่างระหว่างโต๊ะลงเหลือ 15px (เดิม 30px) */
+}
+.col-seats .seat:last-child {
+  margin-bottom: 0 !important;
+}
+.row-seatvip {
+  display: flex;
+  flex-direction: row;
+  width: 191px; /* ล็อกความกว้างให้เท่ากับขอบโต๊ะเป๊ะๆ */
+  margin-left: 130px;
+  margin-top: 8px;
+  gap: 10px; /* 📏 ปรับตัวเลขตรงนี้ได้เลย (ยิ่งมากยิ่งห่าง) */
+}
+
+/* 2. จัดกลุ่มเก้าอี้แนวนอนให้พอดีกับโต๊ะ */
+.row-seats {
+  display: flex;
+  flex-direction: row;
+  width: 191px; /* ล็อกความกว้างให้เท่ากับขอบโต๊ะเป๊ะๆ */
+  margin-top: 8px;
+}
+
+.row-seats .seat {
+  margin-right: 5px; /* ระยะห่างปกติระหว่างเก้าอี้ */
+}
+
+/* บังคับให้เว้นช่องว่าง 15px เฉพาะหลังเก้าอี้ตัวที่ 3 (A33 และ C33) */
+.row-seats .seat:nth-child(3) {
+  margin-right: 15px; 
+}
+
+/* เก้าอี้ตัวสุดท้ายไม่ต้องมีระยะห่าง */
+.row-seats .seat:last-child {
+  margin-right: 0 !important;
+}
+
+
+/* 5. Footer ปุ่มยืนยัน */
+.footer-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  padding: 20px 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+
+  /* ✅ สิ่งที่ต้องเปลี่ยน: ล็อกขนาดให้เท่ากับแผนผังเช่นกัน */
+  margin: 20px auto 40px auto; /* เพิ่ม margin ด้านล่างเผื่อขอบจอไว้หน่อย */
+  min-width: 950px;
+  width: max-content;
+}
+
+.confirm-btn {
+  background: #8d775f; color: white; padding: 12px 30px;
+  border: none; border-radius: 8px; font-size: 16px; cursor: pointer;
+}
+.confirm-btn:disabled { background: #ccc; cursor: not-allowed; }
