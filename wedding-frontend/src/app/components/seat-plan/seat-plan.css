@@ -314,47 +314,42 @@
 /* 1. สำหรับหน้าจอที่เล็กกว่าคอมพิวเตอร์ (Tablet / iPad ลงมา) */
 /* 1. สำหรับหน้าจอที่เล็กกว่าคอมพิวเตอร์ (Tablet / iPad ลงมา) */
 /* 1. สำหรับหน้าจอที่เล็กกว่าคอมพิวเตอร์ (Tablet / iPad ลงมา) */
+/* 1. สำหรับหน้าจอที่เล็กกว่าคอมพิวเตอร์ (Tablet / iPad ลงมา) */
 @media screen and (max-width: 1024px) {
-  /* ✅ 1. ล็อกหน้าเว็บไม่ให้ขยายตามแผนผัง (แก้ปัญหา Header แหว่ง) */
   body, html {
-    overflow-x: hidden;
+    overflow-x: hidden; /* ล็อกไม่ให้หน้าเว็บเลื่อนซ้ายขวาแบบเละเทะ */
   }
 
-  .seat-plan-wrapper {
-    overflow-x: hidden;
-    box-sizing: border-box;
-  }
-
-  /* ✅ 2. ล็อกส่วนหัวและปุ่มให้พอดีกับหน้าจอมือถือเสมอ */
+  /* ส่วนหัวและปุ่ม ให้เต็มจอมือถือปกติ */
   .header-section, 
   .footer-action {
     min-width: 100% !important; 
     width: 100% !important;
-    box-sizing: border-box; /* ป้องกันขอบล้นจอ */
+    box-sizing: border-box;
   }
   
-  /* ✅ 3. บังคับให้ "เลื่อนซ้าย-ขวาได้เฉพาะในกล่องนี้เท่านั้น" */
+  /* ✅ หัวใจสำคัญ: ย่อส่วนแผนผังที่นั่งให้พอดีจอ */
   .floor-plan-container {
-    min-width: 100% !important; 
-    max-width: 100% !important; 
-    width: 100% !important;
-    overflow-x: auto; /* สร้าง Scroll แนวนอนเฉพาะกล่องแผนผัง */
-    -webkit-overflow-scrolling: touch; 
-    padding: 20px 10px;
-    box-sizing: border-box; /* สำคัญมาก ป้องกัน padding ดันกล่องทะลุจอ */
+    width: 950px !important;       /* คงความกว้างจริงของผังโต๊ะไว้ */
+    min-width: 950px !important; 
     
-    align-items: flex-start !important; /* แก้ปัญหาฝั่งซ้ายตกขอบ */
+    /* 🔥 คำสั่งพระเอก: คำนวณความกว้างจอมือถือ (100vw) แล้วย่อผังให้พอดีเป๊ะ 🔥 */
+    zoom: calc((100vw - 40px) / 950); 
+    
+    margin: 0 auto;
+    padding: 20px 0;
+    overflow: visible !important; /* ปิด Scrollbar เพราะมันพอดีจอแล้ว */
+    align-items: center !important; /* จัดให้อยู่กึ่งกลางจอได้เลย */
   }
 
-  /* บังคับกลุ่มโต๊ะหลักให้เริ่มจากซ้าย และเผื่อพื้นที่ขอบขวาตอนไถสุด */
+  /* จัดโต๊ะให้อยู่กึ่งกลางเหมือนเดิม */
   .main-tables-zone {
-    justify-content: flex-start !important;
-    padding-right: 40px; 
+    justify-content: center !important;
+    padding-right: 0; 
   }
 
-  /* ล็อกโซน VIP ให้กว้างเท่ากลุ่มโต๊ะหลัก เพื่อให้ตอนเลื่อนมันไปพร้อมๆ กัน */
   .vip-zone {
-    width: 800px; 
+    width: 100%; 
   }
 }
 
